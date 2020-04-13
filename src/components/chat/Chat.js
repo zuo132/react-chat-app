@@ -40,6 +40,10 @@ const Chat = ({ location }) => {
     }, []);
 
     useEffect(() => {
+        decryptMessages();
+    }, [key, messages]);
+
+    const decryptMessages = () => {
         if (key !== "") {
             messages.forEach((message) => {
                 if (!message.decryptionStatus && message.user !== "admin") {
@@ -52,7 +56,7 @@ const Chat = ({ location }) => {
                 }
             });
         }
-    }, [key, messages]);
+    }
 
     const becomeMember = () => {
         setIsMember(true);
@@ -85,11 +89,13 @@ const Chat = ({ location }) => {
                     leaveGroup={leaveGroup}
                 />
                 <Messages messages={messages} name={name} />
-                <Input
-                    message={message}
-                    setMessage={setMessage}
-                    sendMessage={sendMessage}
-                />
+                {isMember && (
+                    <Input
+                        message={message}
+                        setMessage={setMessage}
+                        sendMessage={sendMessage}
+                    />
+                )}
             </div>
         </div>
     );

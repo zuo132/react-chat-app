@@ -1,4 +1,5 @@
 const users = [];
+const roomKeys = [];
 
 const addUser = ({ id, name, room }) => {
     name = name.trim().toLowerCase();
@@ -29,4 +30,18 @@ const getUsersInRoom = (room) => {
     users.filter((user) => user.room === room);
 };
 
-module.exports = { addUser, removeUser, getUser, getUsersInRoom };
+const setUserKey = (id) => {
+    const user = getUser(id);
+    const keyObject = roomKeys.find((roomKey) => roomKey.room === user.room);
+    let groupKey;
+    if (keyObject) {
+        groupKey = keyObject.key;
+    } else {
+        groupKey = Math.random().toString(36).slice(2);
+        roomKeys.push({ room: user.room, key: groupKey });
+    }
+    user.key = groupKey;
+    return groupKey;
+};
+
+module.exports = { addUser, removeUser, getUser, getUsersInRoom, setUserKey };

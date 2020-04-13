@@ -4,13 +4,11 @@ const http = require("http");
 const cryptojs = require("crypto-js");
 
 const router = require("./router");
-const { addUser, removeUser, getUser, getUsersInRoom } = require("./user");
+const { addUser, removeUser, getUser, getUsersInRoom, setUserKey } = require("./user");
 
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-
-const key = Math.random().toString(36).slice(2);
 
 app.use(router);
 
@@ -33,12 +31,17 @@ io.on("connection", (socket) => {
     });
 
     socket.on("becomeMember", ({ name, room }, callback) => {
-        callback(key);
-    })
+        const key = setUserKey(socket.id);
+        io.to(room).emit("message", {
+            user: "admin",
+            text: `${name} is now a group member!`,
+        });
+        callback(key)
+    });
 
     socket.on("sendMessage", (message, callback) => {
         const user = getUser(socket.id);
-        const encryptedMessage = cryptojs.AES.encrypt(message, key).toString();
+        const encryptedMessage = cryptojs.AES.encrypt(message, user.key).toString();
         io.to(user.room).emit("message", {
             user: user.name,
             text: encryptedMessage,
