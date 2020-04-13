@@ -2,14 +2,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Quick Start Guide
 
-git clone https://github.com/zuo132/react-chat-app.git  # Clone this repository
-cd react-chat-app  # Change to the cloned directory<br />
-npm install     # Install dependancies<br />
-npm start       # Start the client in browser<br />
+git clone https://github.com/zuo132/react-chat-app.git                  # Clone this repository <br />
+cd react-chat-app                   # Change to the cloned directory<br />
+npm install                  # Install dependancies<br />
+npm start                    # Start the client in browser<br />
 
     - in another terminal -
-cd server       # Navigate to server folder<br />
-npm start       # Start the server<br />
+cd server                   # Navigate to server folder<br />
+npm start                    # Start the server<br />
 
 ## Available Scripts
 
