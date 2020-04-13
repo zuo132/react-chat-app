@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
+import cryptojs from "crypto-js";
 
 import InfoBar from "../infobar/InfoBar";
 import Input from "../input/Input";
-import Messages from '../messages/Messages'
+import Messages from "../messages/Messages";
 
 let socket;
 
 const Chat = ({ location }) => {
     const [name, setName] = useState("");
     const [room, setRoom] = useState("");
+    const [isMember, setIsMember] = useState(false);
+    const [key, setKey] = useState("");
+    const [decrypt, setDecrypt] = useState(false);
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const ENDPOINT = "localhost:8080";
@@ -25,15 +29,43 @@ const Chat = ({ location }) => {
         );
         return () => {
             socket.emit("disconnect");
-            socket.off();
+            socket.disconnect();
         };
     }, [ENDPOINT, location.search]);
 
     useEffect(() => {
         socket.on("message", (message) => {
-            setMessages([...messages, message]);
+            setMessages((messages) => [...messages, message]);
         });
-    }, [messages]);
+    }, []);
+
+    useEffect(() => {
+        if (key !== "") {
+            messages.forEach((message) => {
+                if (!message.decryptionStatus && message.user !== "admin") {
+                    const decryptedMessage = cryptojs.AES.decrypt(
+                        message.text,
+                        key
+                    ).toString(cryptojs.enc.Utf8);
+                    message.text = decryptedMessage;
+                    message.decryptionStatus = true;
+                }
+            });
+        }
+    }, [key, messages]);
+
+    const becomeMember = () => {
+        setIsMember(true);
+        socket.emit("becomeMember", { name, room }, (secretKey) => {
+            setKey(secretKey);
+            setDecrypt(!decrypt);
+        });
+    };
+
+    const leaveGroup = () => {
+        setIsMember(false);
+        setKey("");
+    };
 
     const sendMessage = (event) => {
         event.preventDefault();
@@ -46,7 +78,12 @@ const Chat = ({ location }) => {
     return (
         <div>
             <div>
-                <InfoBar room={room} />
+                <InfoBar
+                    room={room}
+                    isMember={isMember}
+                    becomeMember={becomeMember}
+                    leaveGroup={leaveGroup}
+                />
                 <Messages messages={messages} name={name} />
                 <Input
                     message={message}
