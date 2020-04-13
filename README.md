@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Quick Start Guide
+
+git clone https://github.com/zuo132/react-chat-app.git  # Clone this repository
+cd react-chat-app  # Change to the cloned directory
+npm install     # Install dependancies
+npm start       # Start the client in browser
+
+    - in another terminal -
+cd server       # Navigate to server folder
+npm start       # Start the server
+
 ## Available Scripts
 
 In the project directory, you can run:
