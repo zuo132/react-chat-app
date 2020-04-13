@@ -8,16 +8,16 @@ const Join = () => {
     const [room, setRoom] = useState("");
 
     return (
-        <div className="container">
-            <h1 className="heading">Join</h1>
-            <div>
+        <div className="join-container">
+            <h1 className="heading">Join Group</h1>
+            <div className="join-input">
                 <input
                     placeholder="Name"
                     type="text"
                     onChange={(event) => setName(event.target.value)}
                 />
             </div>
-            <div>
+            <div className="join-input">
                 <input
                     placeholder="Room"
                     type="text"
@@ -30,7 +30,7 @@ const Join = () => {
                     !name || !room ? event.preventDefault() : null
                 }
             >
-                <button type="submit">Sign In</button>
+                <button className="join-button" type="submit">Sign In</button>
             </Link>
         </div>
     );

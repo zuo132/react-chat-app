@@ -1,0 +1,16 @@
+
+.infobar-title {
+    color: white;
+    margin: 20px auto;
+}
+
+.infobar-button {
+    background: rgb(56, 55, 55);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    height: 50px;
+    margin: 20px;
+    padding: 15px;
+    cursor: pointer;
+}

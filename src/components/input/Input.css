@@ -1,0 +1,19 @@
+
+.input-textfield {
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.input-button {
+    background: rgb(56, 55, 55);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    margin: 20px;
+    padding: 10px;
+    cursor: pointer;
+}

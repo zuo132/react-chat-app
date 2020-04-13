@@ -1,0 +1,38 @@
+
+.join-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 100px 30vw;
+    background: gray;
+}
+
+.heading {
+    color: white;
+    margin: 30px 50px;
+}
+
+.join-input {
+    margin: 10px;
+}
+
+.join-input input {
+    width: 400px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.join-button {
+    background: rgb(56, 55, 55);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    margin: 20px;
+    cursor: pointer;
+}

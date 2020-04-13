@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './Message.css'
+
 const Message = ({ message, name }) => {
     let isSentByCurrentUser = false;
     const trimmedName = name.trim().toLowerCase();
@@ -8,19 +10,19 @@ const Message = ({ message, name }) => {
     return (
         isSentByCurrentUser
         ? (
-            <div>
-                <p>{trimmedName}</p>
+            <div className="own-message">
+                <p className="sender-name">{trimmedName}</p>
                 <div>
-                    <p>{message.text}</p>
+                    <p className="message-content">{message.text}</p>
                 </div>
             </div>
         )
         : (
-            <div>
+            <div className="message">
                 <div>
-                    <p>{message.text}</p>
+                    <p className="message-content">{message.text}</p>
                 </div>
-                <p>{message.user}</p>
+                <p className="sender-name">{message.user}</p>
             </div>
         )
     )

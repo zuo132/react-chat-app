@@ -1,0 +1,33 @@
+
+
+.own-message {
+    margin-left: 50%;
+    padding: 10px;
+}
+
+.message {
+    margin-right: 50%;
+    padding: 10px;
+}
+
+.sender-name {
+    color: white;
+}
+
+.own-message .message-content {
+    background: white;
+    color: rgb(46, 43, 43);
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-align: right;
+    display: inline-block;
+}
+
+.message .message-content {
+    background: rgb(49, 48, 48);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-align: right;
+    display: inline-block;
+}

@@ -7,6 +7,8 @@ import InfoBar from "../infobar/InfoBar";
 import Input from "../input/Input";
 import Messages from "../messages/Messages";
 
+import './Chat.css';
+
 let socket;
 
 const Chat = ({ location }) => {
@@ -56,7 +58,7 @@ const Chat = ({ location }) => {
                 }
             });
         }
-    }
+    };
 
     const becomeMember = () => {
         setIsMember(true);
@@ -80,23 +82,21 @@ const Chat = ({ location }) => {
     };
 
     return (
-        <div>
-            <div>
-                <InfoBar
-                    room={room}
-                    isMember={isMember}
-                    becomeMember={becomeMember}
-                    leaveGroup={leaveGroup}
+        <div className="chat-container">
+            <InfoBar
+                room={room}
+                isMember={isMember}
+                becomeMember={becomeMember}
+                leaveGroup={leaveGroup}
+            />
+            <Messages messages={messages} name={name} />
+            {isMember && (
+                <Input
+                    message={message}
+                    setMessage={setMessage}
+                    sendMessage={sendMessage}
                 />
-                <Messages messages={messages} name={name} />
-                {isMember && (
-                    <Input
-                        message={message}
-                        setMessage={setMessage}
-                        sendMessage={sendMessage}
-                    />
-                )}
-            </div>
+            )}
         </div>
     );
 };

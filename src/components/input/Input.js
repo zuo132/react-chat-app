@@ -1,9 +1,12 @@
 import React from "react";
 
+import './Input.css'
+
 const Input = ({ message, setMessage, sendMessage }) => {
     return (
         <form>
             <input
+                className="input-textfield"
                 type='text'
                 placeholder='Enter a message'
                 value={message}
@@ -12,7 +15,7 @@ const Input = ({ message, setMessage, sendMessage }) => {
                     event.key === "Enter" ? sendMessage(event) : null
                 }
             />
-            <button onClick={(event) => sendMessage(event)}>
+            <button className="input-button" onClick={(event) => sendMessage(event)}>
                 Send Message
             </button>
         </form>
